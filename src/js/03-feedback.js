@@ -36,9 +36,14 @@ function populateTextarea() {
   const savedMessage = localStorage.getItem(STORAGE_KEY);
   if (savedMessage) {
     console.log(savedMessage);
-    const savedMessageParsed = JSON.parse(savedMessage);
-    Object.keys(savedMessageParsed).forEach(
-      key => (form[key].value = savedMessageParsed[key])
-    );
+    try {
+      const savedMessageParsed = JSON.parse(savedMessage);
+      Object.keys(savedMessageParsed).forEach(
+        key => (form[key].value = savedMessageParsed[key])
+      );
+    } catch (error) {
+      console.log(error.email); // "SyntaxError"
+      console.log(error.message); // "Unexpected token u in JSON at position 1"
+    }
   }
 }
