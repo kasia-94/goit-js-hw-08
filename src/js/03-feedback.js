@@ -20,15 +20,14 @@ function onFormSubmit(e) {
   if (email.value === '' || message.value === '') {
     return alert('Please fill in all the fields!');
   }
-
   console.log({ email: email.value, message: message.value });
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
 
 function onFormInput(e) {
-  formData[e.target.name] = e.target.value;
-  const formDataJSON = JSON.stringify(formData);
+  const formData = new FormData(form);
+  const formDataJSON = JSON.stringify(Object.fromEntries(formData));
   localStorage.setItem(STORAGE_KEY, formDataJSON);
 }
 
